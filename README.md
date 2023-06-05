@@ -30,4 +30,4 @@ print(new_row)
 
 # OppFiller example files
 
-Example files can be found at [example.py](example.py) and [example.ipynb](example.ipynb).
+Example files can be found at [example.py](example.py).
