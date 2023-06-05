@@ -13,8 +13,8 @@ import OppFiller.Functions as oppf
 
 dataset_path='../dataset/1-raw/full_body.csv';
 output_path='../dataset/2-data';
-output_filename_x='data_x.csv';
-output_filename_y='data_y.csv';
+output_filename_x='data_normalized_x.csv';
+output_filename_y='data_normalized_y.csv';
 MAX_NHOLES=10;
 ANGLE=20;
 
@@ -49,6 +49,7 @@ for nth_row in tqdm(range(L)):
     
     
     for nholes in range(MAX_NHOLES):
+        # data augmentation
         ang=random.uniform(-ANGLE, ANGLE);
         row_x=oppf.centering_rotation_of_row_data(np_row,ang);
         row_y=row_x.copy();
@@ -56,6 +57,10 @@ for nth_row in tqdm(range(L)):
         #print('np_row:\n',np_row)
         #print('row_x:\n',row_x)
         
+        # normalization
+        
+        
+        # writing
         writerx.writerow(row_x)
         writery.writerow(row_y)
 
