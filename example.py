@@ -1,12 +1,7 @@
-# Install OppFiller
+#!/usr/bin/python
 
-Install OppFiller following https://github.com/trucomanx/oppfiller/blob/main/README_install.md 
+# pip3 install OppFiller-X.Y.Z.tar.gz 
 
-# OppFiller example code
-
-The next code shows an example use of OppFiller library.
-
-```python
 import OppFiller.Filler as oppmg
 import OppFiller.Functions as oppf
 
@@ -23,11 +18,7 @@ obj=oppmg.Filler(model_type='sequence1');
 
 new_row=obj.FillRowData(row_x);
 
+
 print(row_data)
 print(row_x)    
 print(new_row)
-```
-
-# OppFiller example files
-
-Example files can be found at [example.py](example.py) and [example.ipynb](example.ipynb).

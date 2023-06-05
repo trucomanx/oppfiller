@@ -16,6 +16,7 @@ setup(
     install_requires=[
        "openpifpaf",
        "tensorflow",
+       "matplotlib",
        "numpy" #"Django >= 1.1.1",
     ],
 )
