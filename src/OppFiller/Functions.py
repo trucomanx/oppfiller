@@ -59,6 +59,27 @@ def valid_center_of_row_data(row_data):
             print(row_data[2*n],row_data[2*n+1])
     
     return x0/k,y0/k;
+
+def valid_rms_of_row_data(row_data):
+    '''
+    Calcula el valor root mean square de todas las cordenadas dos pontos em row_data.
+    Desconsidera potos com ambos zeros.
+    Acepta negativos.
+    '''
+    if row_data.size!=34:
+        sys.exit("The row don't have 34 elements");
+    S=0.0;
+    k=0;
+    
+    for n in range(17):
+        if row_data[2*n]!=0 or row_data[2*n+1]!=0:
+            S=S+row_data[2*n]*row_data[2*n];
+            S=S+row_data[2*n+1]*row_data[2*n+1];
+            k=k+2;
+        else:
+            print(row_data[2*n],row_data[2*n+1])
+    
+    return np.sqrt(S/k);
     
 def add_offset_to_valid_row_data(row_data,dx,dy):
     if row_data.size!=34:
