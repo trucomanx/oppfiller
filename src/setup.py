@@ -11,9 +11,11 @@ setup(
     #scripts=['bin/script1','bin/script2'],
     url='https://github.com/trucomanx/oppfiller',
     license='GPLv3',
-    description='filler of OpenPifPaf data',
+    description='Filler of OpenPifPaf data',
     #long_description=open('README.txt').read(),
     install_requires=[
+       "openpifpaf",
+       "tensorflow",
        "numpy" #"Django >= 1.1.1",
     ],
 )
