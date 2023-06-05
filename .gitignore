@@ -1,0 +1,7 @@
+src/__pycache__
+.ipynb_checkpoints
+src/.ipynb_checkpoints
+src/OppFiller/OppFiller.egg-info
+src/OppFiller/__pycache__
+src/dist
+src/OppFiller.egg-info
