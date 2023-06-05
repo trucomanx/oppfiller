@@ -82,13 +82,18 @@ def valid_rms_of_row_data(row_data):
     return np.sqrt(S/k);
     
 def add_offset_to_valid_row_data(row_data,dx,dy):
+    '''
+    Agrega a todas las cordenadas em row_data.
+    Desconsidera potos com ambos zeros.
+    Acepta negativos.
+    '''
     if row_data.size!=34:
         sys.exit("The row don't have 34 elements");
     
     row_data_new=np.zeros(row_data.shape);
     
     for n in range(17):
-        if row_data[2*n]>0 and row_data[2*n+1]>0:
+        if row_data[2*n]!=0 or row_data[2*n+1]!=0:
             row_data_new[2*n]  =dx+row_data[2*n];
             row_data_new[2*n+1]=dy+row_data[2*n+1];
     
