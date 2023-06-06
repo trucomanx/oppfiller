@@ -40,7 +40,7 @@ def create_model_sequence1(file_of_weight=''):
     return model;
 
 
-def create_model_sequence12(file_of_weight=''):
+def create_model_sequence2(file_of_weight=''):
     '''
     Retorna un modelo.
     Adicionalmente, si el archivo `file_of_weight` existe los pesos son cargados.
@@ -63,7 +63,7 @@ def create_model_sequence12(file_of_weight=''):
     model.add(tf.keras.layers.Dense(      136, activation=func) );
     model.add(tf.keras.layers.Dense(      102, activation=func) );
     model.add(tf.keras.layers.Dense(       68, activation=func) );
-    model.add(tf.keras.layers.Dense( noutputs, activation=func) );
+    model.add(tf.keras.layers.Dense( noutputs, activation='linear') );
     
     if (len(file_of_weight)!=0):
         if pathlib.Path(file_of_weight).is_file():

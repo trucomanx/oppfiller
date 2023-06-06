@@ -37,28 +37,28 @@ writery.writerow(df.columns)
 L=df.shape[0];
 
 for nth_row in tqdm(range(L)):
-    #for index, row in df.iterrows():
-    row = df.iloc[nth_row]
+    row = df.iloc[nth_row];
     np_row = row.to_numpy();
     
-    
+    # data
     row_x  = np_row.copy();
     row_y  = np_row.copy();
+    
+    # Writting
     writerx.writerow(row_x)
     writery.writerow(row_y)
     
     
     for nholes in range(MAX_NHOLES):
+        # data augmentation
         ang=random.uniform(-ANGLE, ANGLE);
         row_x=oppf.centering_rotation_of_row_data(np_row,ang);
         row_y=row_x.copy();
         row_x=oppf.drop_n_elements_randomly_in_row_data(row_x,nholes);
-        #print('np_row:\n',np_row)
-        #print('row_x:\n',row_x)
         
-        writerx.writerow(row_x)
-        writery.writerow(row_y)
+        # writing
+        writerx.writerow(row_x);
+        writery.writerow(row_y);
 
-
-print('shape pf x:',pd.read_csv(filepath_x).shape)
-print('shape pf y:',pd.read_csv(filepath_y).shape)
+print('shape pf x:',pd.read_csv(filepath_x).shape);
+print('shape pf y:',pd.read_csv(filepath_y).shape);

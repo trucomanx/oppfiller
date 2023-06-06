@@ -44,19 +44,24 @@ def check_data(data):
     return data;
 
 def valid_center_of_row_data(row_data):
+    '''
+    Calcula el valor central de todas las cordenadas dos pontos em row_data.
+    Desconsidera potos com ambos zeros.
+    Acepta negativos.
+    '''
     if row_data.size!=34:
         sys.exit("The row don't have 34 elements");
-    x0=0;
-    y0=0;
+    x0=0.0;
+    y0=0.0;
     k=0;
     
     for n in range(17):
-        if row_data[2*n]>0 and row_data[2*n+1]>0:
-            x0=x0+row_data[2*n];
-            y0=y0+row_data[2*n+1];
+        if row_data.flat[2*n]!=0 or row_data.flat[2*n+1]!=0:
+            x0=x0+row_data.flat[2*n];
+            y0=y0+row_data.flat[2*n+1];
             k=k+1;
-        else:
-            print(row_data[2*n],row_data[2*n+1])
+        #else:
+        #    print('valid_center_of_row_data():',row_data[2*n],row_data[2*n+1])
     
     return x0/k,y0/k;
 
@@ -72,12 +77,12 @@ def valid_rms_of_row_data(row_data):
     k=0;
     
     for n in range(17):
-        if row_data[2*n]!=0 or row_data[2*n+1]!=0:
-            S=S+row_data[2*n]*row_data[2*n];
-            S=S+row_data[2*n+1]*row_data[2*n+1];
+        if row_data.flat[2*n]!=0 or row_data.flat[2*n+1]!=0:
+            S=S+row_data.flat[2*n]*row_data.flat[2*n];
+            S=S+row_data.flat[2*n+1]*row_data.flat[2*n+1];
             k=k+2;
-        else:
-            print(row_data[2*n],row_data[2*n+1])
+        #else:
+        #    print(row_data[2*n],row_data[2*n+1])
     
     return np.sqrt(S/k);
     
@@ -93,9 +98,9 @@ def add_offset_to_valid_row_data(row_data,dx,dy):
     row_data_new=np.zeros(row_data.shape);
     
     for n in range(17):
-        if row_data[2*n]!=0 or row_data[2*n+1]!=0:
-            row_data_new[2*n]  =dx+row_data[2*n];
-            row_data_new[2*n+1]=dy+row_data[2*n+1];
+        if row_data.item(2*n)!=0 or row_data.item(2*n+1)!=0:
+            row_data_new.flat[2*n]  =dx+row_data.item(2*n);
+            row_data_new.flat[2*n+1]=dy+row_data.item(2*n+1);
     
     return row_data_new;
 
@@ -106,8 +111,8 @@ def add_offset_to_row_data(row_data,dx,dy):
     row_data_new=np.zeros(row_data.shape);
     
     for n in range(17):
-        row_data_new[2*n]  =dx+row_data[2*n];
-        row_data_new[2*n+1]=dy+row_data[2*n+1];
+        row_data_new.flat[2*n]  =dx+row_data.flat[2*n];
+        row_data_new.flat[2*n+1]=dy+row_data.flat[2*n+1];
     
     return row_data_new;
 
@@ -120,12 +125,18 @@ def multiply_value_to_valid_row_data(row_data,value):
     if row_data.size!=34:
         sys.exit("The row don't have 34 elements");
     
+    row_data_new=np.multiply(row_data,value);
+    
+    #print('row_data_new.shape',row_data_new.shape)
+    
+    '''
     row_data_new=np.zeros(row_data.shape);
     
     for n in range(17):
-        if row_data[2*n]!=0 or row_data[2*n+1]!=0:
+        if ((row_data[2*n]!=0) or (row_data[2*n+1]!=0)):
             row_data_new[2*n]  =value*row_data[2*n];
             row_data_new[2*n+1]=value*row_data[2*n+1];
+    '''
     
     return row_data_new;
 
@@ -176,3 +187,28 @@ def drop_n_elements_randomly_in_row_data(row_data,nholes):
     
     return out;
 
+def normalize_valid_row_data(row_data):
+    xc,yc=valid_center_of_row_data(row_data);
+    
+    row_x_c=add_offset_to_valid_row_data(row_data,-xc,-yc);
+    
+    S=valid_rms_of_row_data(row_x_c);
+    
+    row_x_c=multiply_value_to_valid_row_data(row_x_c,1.0/S);
+    
+    return row_x_c,xc,yc,S;
+
+def normalize_valid_row_data_with(row_data,xc,yc,S):
+
+    row_x_c=add_offset_to_valid_row_data(row_data,-xc,-yc);
+    
+    out_x_c=multiply_value_to_valid_row_data(row_x_c,1.0/S);
+    
+    return out_x_c;
+
+def unnormalize_valid_row_data(row_data,xc,yc,S):
+    row_x=multiply_value_to_valid_row_data(row_data,S);
+    
+    out_x=add_offset_to_valid_row_data(row_x,xc,yc);
+    
+    return out_x;

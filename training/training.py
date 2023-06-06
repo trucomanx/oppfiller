@@ -13,9 +13,16 @@ import csv
 
 BATCHSIZE=32;
 EPOCHS=150;
-model_type='sequence1';
-dataset_x_path='../dataset/2-data/data_x.csv';
-dataset_y_path='../dataset/2-data/data_y.csv';
+NORMALIZED=True;
+
+if NORMALIZED:
+    model_type='sequence2';
+    dataset_x_path='../dataset/2-data/data_normalized_x.csv';
+    dataset_y_path='../dataset/2-data/data_normalized_y.csv';
+else:
+    model_type='sequence1';
+    dataset_x_path='../dataset/2-data/data_x.csv';
+    dataset_y_path='../dataset/2-data/data_y.csv';
 
 ################################################################################
 

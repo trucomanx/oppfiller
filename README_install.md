@@ -1,3 +1,8 @@
+# Requirements
+Install the requirements.
+
+    pip install -r requirements.txt
+
 # Packaging
 
 Download the source code
