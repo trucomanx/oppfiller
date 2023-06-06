@@ -96,7 +96,17 @@ def plot_history(history,outdir='./',prename='training'):
     #plt.ylim([0,5])
     plt.legend()
     filepath=os.path.join(outdir,prename+'_mae.svg');
-    plt.savefig(filepath, dpi=150);
+    plt.savefig(filepath, dpi=200);
+    
+    plt.figure()
+    plt.xlabel('Epoch')
+    plt.ylabel('Mean Abs Percentage Error')
+    plt.plot(history.epoch, np.array(hist['mape'])    , label = 'Train Error')
+    plt.plot(history.epoch, np.array(hist['val_mape']), label = 'Val Error')
+    #plt.ylim([0,5])
+    plt.legend()
+    filepath=os.path.join(outdir,prename+'_mape.svg');
+    plt.savefig(filepath, dpi=200);
     
     plt.figure()
     plt.xlabel('Epoch')
@@ -107,6 +117,6 @@ def plot_history(history,outdir='./',prename='training'):
     plt.legend()
     #plt.show()
     filepath=os.path.join(outdir,prename+'_rmse.svg');
-    plt.savefig(filepath, dpi=150);
+    plt.savefig(filepath, dpi=200);
     
 

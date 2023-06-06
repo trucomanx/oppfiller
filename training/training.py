@@ -12,8 +12,8 @@ import csv
 ################################################################################
 
 BATCHSIZE=32;
-EPOCHS=150;
-NORMALIZED=True;
+EPOCHS=200;
+NORMALIZED=True;#False;#True;
 
 if NORMALIZED:
     model_type='sequence2';
@@ -52,7 +52,7 @@ else:
 model.summary()
 model.compile(optimizer='adam', 
               loss='mse',
-              metrics=['mae', 'mse'])
+              metrics=['mae','mape', 'mse'])
 
 
 output_dir='model_'+model_type;

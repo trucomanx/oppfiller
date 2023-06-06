@@ -16,7 +16,7 @@ output_path='../dataset/2-data';
 output_filename_x='data_normalized_x.csv';
 output_filename_y='data_normalized_y.csv';
 MAX_NHOLES=10;
-ANGLE=20;
+ANGLE=25;
 
 
 filepath_x = os.path.join(output_path,output_filename_x)
@@ -53,7 +53,7 @@ for nth_row in tqdm(range(L)):
     writery.writerow(row_y_c)
     
     
-    for nholes in range(MAX_NHOLES):
+    for nholes in range(1,1+MAX_NHOLES):
         # data augmentation
         ang=random.uniform(-ANGLE, ANGLE);
         row_x=oppf.centering_rotation_of_row_data(np_row,ang);
