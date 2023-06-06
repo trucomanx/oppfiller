@@ -111,6 +111,24 @@ def add_offset_to_row_data(row_data,dx,dy):
     
     return row_data_new;
 
+def multiply_value_to_valid_row_data(row_data,value):
+    '''
+    Multiplica a todas las cordenadas em row_data.
+    Desconsidera potos com ambos zeros.
+    Acepta negativos.
+    '''
+    if row_data.size!=34:
+        sys.exit("The row don't have 34 elements");
+    
+    row_data_new=np.zeros(row_data.shape);
+    
+    for n in range(17):
+        if row_data[2*n]!=0 or row_data[2*n+1]!=0:
+            row_data_new[2*n]  =value*row_data[2*n];
+            row_data_new[2*n+1]=value*row_data[2*n+1];
+    
+    return row_data_new;
+
 def centering_rotation_of_row_data(row_data,angle):
     if row_data.size!=34:
         sys.exit("The row don't have 34 elements");
