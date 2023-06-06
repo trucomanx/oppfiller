@@ -66,8 +66,8 @@ for nth_row in tqdm(range(L)):
         row_y_c=oppf.add_offset_to_valid_row_data(row_y,-xc,-yx);
         
         # writing
-        writerx.writerow(row_x)
-        writery.writerow(row_y)
+        writerx.writerow(row_x_c)
+        writery.writerow(row_y_c)
 
 
 print('shape pf x:',pd.read_csv(filepath_x).shape)
