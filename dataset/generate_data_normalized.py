@@ -59,11 +59,14 @@ for nth_row in tqdm(range(L)):
         
         # normalization
         xc,yc=oppf.valid_center_of_row_data(row_x);
-        S=oppf.valid_rms_of_row_data(row_x);
+        
         
         row_x_c=oppf.add_offset_to_valid_row_data(row_x,-xc,-yx);
+        S=oppf.valid_rms_of_row_data(row_x_c);
+        row_x_c=oppf.multiply_value_to_valid_row_data(row_x_c,1.0/S);
         
         row_y_c=oppf.add_offset_to_valid_row_data(row_y,-xc,-yx);
+        row_y_c=oppf.multiply_value_to_valid_row_data(row_y_c,1.0/S);
         
         # writing
         writerx.writerow(row_x_c)
