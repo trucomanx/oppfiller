@@ -58,7 +58,12 @@ for nth_row in tqdm(range(L)):
         #print('row_x:\n',row_x)
         
         # normalization
+        xc,yc=oppf.valid_center_of_row_data(row_x);
+        S=oppf.valid_rms_of_row_data(row_x);
         
+        row_x_c=add_offset_to_valid_row_data(row_x,-xc,-yx);
+        
+        row_y_c=add_offset_to_valid_row_data(row_y,-xc,-yx);
         
         # writing
         writerx.writerow(row_x)
