@@ -9,23 +9,20 @@ def func_read(fname):
 setup(
     name   ='OppFiller',
     version='0.1.0',
-    author='Fernando Pujaico Rivera',
+    author ='Fernando Pujaico Rivera',
     author_email='fernando.pujaico.rivera@gmail.com',
     maintainer='Fernando Pujaico Rivera',
     maintainer_email='fernando.pujaico.rivera@gmail.com',
-    #scripts=['bin/script1','bin/script2'],
     url='https://github.com/trucomanx/oppfiller',
     license='GPLv3',
-    description='Filler of OpenPifPaf data',
-    #long_description=func_read('README.txt'),
-    include_package_data=True,
-    packages=['OppFiller'],
-    package_dir={'OppFiller':'OppFiller'},
+    description='Filler of OpenPifPaf annotation data',
+    long_description=func_read('README.txt'),
+    packages=find_packages(where='.'),
+    #package_dir={'':'./'},
     package_data = {
-        # If any package contains *.txt or *.rst files, include them:
-        #'': ['*.py','*.h5'],
         'OppFiller': ['*.py','models/model_sequence1/*.h5','models/model_sequence2/*.h5']
     },
+    keywords=['openpifpaf','filler'],
     install_requires=[
        "openpifpaf",
        "tensorflow",
@@ -33,6 +30,10 @@ setup(
        "numpy" #"Django >= 1.1.1",
     ],
 )
+
+print("")
+print("find_packages(where=\'.\');")
+print(find_packages(where='.'))
 
 #! python setup.py sdist bdist_wheel
 # Upload to PyPi
